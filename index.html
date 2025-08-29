@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-SHOP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" />
+    <style>
+        :root {
+            --textColor: #fff;
+            --subTextColor: rgba(255, 255, 255, 0.85);
+            --tagColor: rgba(255, 255, 255, 0.65);
+            --borderColor: rgba(255, 255, 255, 0.15);
+            --hoverBorder: rgba(255, 255, 255, 0.3);
+            --cardBg: rgba(255, 255, 255, 0.05);
+            --shadowColor: rgba(255, 255, 255, 0.03);
+            --bodyBg: #0B0F1A;
+            --bgrate: rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        body.light-mode {
+            --textColor: #111;
+            --subTextColor: rgba(0, 0, 0, 0.85);
+            --tagColor: rgba(0, 0, 0, 0.6);
+            --borderColor: rgba(0, 0, 0, 0.15);
+            --hoverBorder: rgba(0, 0, 0, 0.3);
+            --cardBg: rgba(0, 0, 0, 0.02);
+            --shadowColor: rgba(0, 0, 0, 0.05);
+            --bodyBg: #f4f4f4;
+            --bgrate: black;
+        }
+
+        body {
+            background: var(--bodyBg);
+            color: var(--textColor);
+            transition: background 0.4s ease, color 0.4s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .menu-open {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Price & Tag Styling */
+        .price-text {
+            color: var(--subTextColor);
+        }
+
+        .price {
+            color: var(--subTextColor);
+            font-weight: 500;
+        }
+
+        .dash {
+            color: var(--tagColor);
+            margin: 0 4px;
+        }
+
+        .tag {
+            color: var(--tagColor);
+            border: 1px solid var(--borderColor);
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 12px;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-6px);
+            }
+        }
+
+        .blink {
+            animation: blink 4s infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            92%,
+            100% {
+                height: 1.75rem;
+            }
+
+            95% {
+                height: 0.25rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="text-white">
+
+    <!-- Robot -->
+    <div class="fixed bottom-4 right-4 z-50 scale-50 md:scale-75 lg:scale-90 xl:scale-100">
+        <div class="relative w-24 h-24 bg-gradient-to-br from-gray-800 to-gray-900 rounded-full
+      border-4 border-cyan-400 shadow-[0_0_30px_rgba(0,255,255,0.5)]
+      flex flex-col items-center justify-center animate-[float_3s_ease-in-out_infinite]">
+
+            <!-- Antenna -->
+            <div class="absolute -top-3 w-1.5 h-4 bg-cyan-400 rounded-full"></div>
+            <div class="absolute -top-5 w-3 h-3 rounded-full bg-cyan-400 animate-ping"></div>
+
+            <!-- Eyes -->
+            <div class="flex justify-center items-center gap-2">
+                <div class="eye relative w-8 h-8 bg-white rounded-full flex items-center justify-center">
+                    <div
+                        class="pupil absolute w-3 h-3 bg-black rounded-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                    </div>
+                </div>
+                <div class="eye relative w-8 h-8 bg-white rounded-full flex items-center justify-center">
+                    <div
+                        class="pupil absolute w-3 h-3 bg-black rounded-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mouth -->
+            <div class="absolute bottom-3 flex gap-1">
+                <div class="w-1 h-3 bg-cyan-400 animate-bounce"></div>
+                <div class="w-1 h-4 bg-cyan-400 animate-bounce [animation-delay:0.2s]"></div>
+                <div class="w-1 h-2 bg-cyan-400 animate-bounce [animation-delay:0.4s]"></div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Navbar -->
+    <header class="fixed top-0 left-0 w-full z-50 glass shadow-md" style="color: var(--textColor)">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+            <!-- Logo -->
+            <h1 class="text-2xl font-extrabold tracking-wide"><i class="fa-solid fa-gift text-2xl mr-2"></i>E-SHOP</h1>
+
+            <!-- Search Bar -->
+            <div class="hidden md:flex flex-1 justify-center">
+                <div class="bg-white/10 px-4 py-2 rounded-full flex items-center w-96 shadow-lg">
+                    <input type="text" placeholder="Search..."
+                        class="bg-transparent outline-none text-sm w-full text-[var(--textColor)] placeholder-gray-300" />
+                    <i class="fa fa-search text-gray-300"></i>
+                </div>
+            </div>
+
+            <!-- Right Icons -->
+            <div class="hidden md:flex items-center space-x-4">
+                <!-- Dark Mode Toggle -->
+                <button id="modeToggle" class="text-xl hover:text-yellow-400 transition"><i
+                        class="fa fa-moon"></i></button>
+                <div class="flex space-x-2 items-center">
+                    <img src="data:image/png;base64,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"
+                        alt="" class="w-5 h-5  rounded-full">
+                    <h1>IN/EN</h1>
+                </div>
+                <a href="login.html">
+                    <div class="flex space-x-2 items-center">
+                        <i class="fa-solid fa-user"></i>
+                        <h1 id=logs>Login</h1>
+                    </div>
+                </a>
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-cart-shopping "></i>
+                    <h1>Cart</h1>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="menuBtn" class="md:hidden text-2xl"><i class="fa fa-bars"></i></button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu"
+            class="absolute top-full left-0 w-full glass flex flex-col items-start p-4 space-y-4 transform -translate-y-8 opacity-0 pointer-events-none transition-all duration-300">
+            <a href="#" class="hover:text-purple-400 transition">Phone Refills</a>
+            <a href="#" class="hover:text-purple-400 transition">Gift Cards</a>
+            <a href="#" class="hover:text-purple-400 transition">E-SIM</a>
+            <a href="#" class="hover:text-purple-400 transition">Travel</a>
+            <a href="#" class="hover:text-purple-400 transition">Gaming</a>
+            <div class="w-full bg-white/10 px-4 py-2 rounded-full flex items-center">
+                <input type="text" placeholder="Search..."
+                    class="bg-transparent outline-none text-sm w-full text-white placeholder-gray-300">
+                <i class="fa fa-search text-gray-300"></i>
+            </div>
+        </div>
+        <div class="flex justify-between px-8">
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex mt-3 mb-2 space-x-8">
+                <a href="prodect.html" class="hover:text-purple-400 transition">Phone Refills</a>
+                <a href="allcards.html" class="hover:text-purple-400 transition">Gift Cards</a>
+                <a href="#" class="hover:text-purple-400 transition">E-SIM</a>
+                <a href="#" class="hover:text-purple-400 transition">Travel</a>
+                <a href="#" class="hover:text-purple-400 transition">Gaming</a>
+            </nav>
+            <!-- Install Button -->
+            <div class="hidden md:flex" style="color: var(--bodybg)">
+                <a href="allcards.html"
+                    class="px-5 py-2 rounded-full bg-gradient-to-r from-white/10 to-white/5 hover:from-white/20 hover:to-white/10 border border-white/20 text-white font-medium shadow-md transition">
+                    <i class="fa-solid fa-download mr-2"></i>Install in Mobile
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="relative pt-32 max-w-7xl mx-auto px-4">
+        <div class="absolute right-2 bottom-0 h-40">
+
+        </div>
+        <!-- Popular Section -->
+        <section class="mb-12" style="color: var(--subTextColor)">
+            <div class="flex justify-between mb-4">
+                <h2 class="text-3xl font-bold">Popular Cards</h2>
+                <a href="#" class="text-purple-400 hover:underline">See All</a>
+            </div>
+            <div id="mpopularGrid"
+                class="flex overflow-x-auto space-x-4 snap-x snap-mandatory scrollbar-hide sm:hidden">
+            </div>
+            <div class="hidden sm:grid sm:grid-cols-4 gap-6" id="dpopularGrid"></div>
+
+        </section>
+
+        <!-- Gaming Section -->
+        <section style="color: var(--subTextColor)" class="mb-12">
+            <div class="flex justify-between mb-4">
+                <h2 class="text-3xl font-bold">Gaming</h2>
+                <a href="#" class="text-purple-400 hover:underline">See All</a>
+            </div>
+            <div id="mgamingGrid" class="flex overflow-x-auto space-x-4 snap-x snap-mandatory scrollbar-hide sm:hidden">
+            </div>
+
+            <div class="hidden sm:grid sm:grid-cols-4 gap-6" id="dgamingGrid"></div>
+
+        </section>
+        <!-- Travel -->
+        <section style="color: var(--subTextColor);" class="mb-12">
+            <div class="flex justify-between mb-4">
+                <h2 class="text-3xl font-bold">Travel</h2>
+                <a href="" class="text-purple-400 hover:underline">See All</a>
+            </div>
+            <div class="flex overflow-x-auto space-x-4 snap-x snap-mandatory scrollbar-hide sm:hidden" id="mtravelGrid">
+            </div>
+            <div class="hidden sm:grid grid-cols-4 gap-6" id="dtravelGrid"></div>
+        </section>
+
+        <!-- entertainment -->
+        <section style="color: var(--subTextColor)" class="mb-12">
+            <div class="flex justify-between mb-4">
+                <h1 class="text-3xl font-bold">Entertainment</h1>
+                <a href="" class="text-purple-400 hover:underline">See All</a>
+            </div>
+            <div class="flex overflow-x-auto space-x-4  snap-x snap-mandatory  scrollbar-hide sm:hidden"
+                id="menterGrid"></div>
+            <div class="hidden sm:grid grid-cols-4 gap-6" id="denterGrid"></div>
+        </section>
+
+        <!-- Shopping -->
+        <section style="color: var(--subTextColor)" class="mb-12">
+            <div class="flex justify-between mb-4">
+                <h1 class="text-3xl font-bold">Shopping</h1>
+                <a href="" class="text-purple-400 hover:underline">See All</a>
+            </div>
+            <div class="flex overflow-x-auto space-x-4  snap-x snap-mandatory  scrollbar-hide sm:hidden" id="mshopGrid">
+            </div>
+            <div class="hidden sm:grid grid-cols-4 gap-6" id="dshopGrid"></div>
+        </section>
+
+    </main>
+
+    <footer class="mt-12 text-center text-white/60 text-sm py-6 border-t border-white/10">
+        &copy; <span id="yr"></span> E-SHOP. All Rights Reserved.
+    </footer>
+
+    <!-- Scripts -->
+    <script src="products.js"></script>
+    <script src="emg.js" defer></script>
+    <script>
+        // Check if the 'user' key exists in localStorage
+        const user = localStorage.getItem("log");
+
+        // If the user exists, display it in the 'usernm' div
+        if (user) {
+            document.getElementById("logs").innerHTML = user;
+        } else {
+            // If no user is found in localStorage, display a default message
+            document.getElementById("logs").innerHTML = "Guest";
+        }
+    </script>
+</body>
+
+</html>

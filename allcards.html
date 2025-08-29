@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Shop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Poppins:wght@400;700&display=swap"
+        rel="stylesheet">
+    <script src="productS.js"></script>
+    <style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .carousel-inner img {
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .carousel-caption {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 10px;
+            border-radius: 50%;
+        }
+    </style>
+
+</head>
+
+<body class="bg-[#0B0F1A] text-white font-sans">
+    <header class="bg-[#0f1115] shadow-md">
+        <div class="container mx-auto px-6 py-3 flex items-center justify-between">
+
+            <!-- Logo -->
+            <div class="hidden md:flex items-center space-x-2">
+                <h1
+                    class="text-2xl font-extrabold text-white tracking-wide hover:text-purple-400 transition-colors duration-300">
+                    E-SHOP
+                </h1>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="hidden md:flex items-center bg-white rounded-full overflow-hidden shadow-md w-1/3">
+                <input type="text" placeholder="Search..." class="w-full px-4 py-2 text-gray-700 outline-none">
+                <button class="px-4 text-gray-500 hover:text-purple-500 transition-colors">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+
+            <!-- Install Button -->
+            <div class="hidden md:flex">
+                <button
+                    class="px-5 py-2 font-semibold text-white rounded-full bg-gradient-to-r from-purple-500 to-blue-500 shadow-lg hover:scale-110 hover:shadow-purple-500/50 transition-all duration-300">
+                    Install in Mobile
+                </button>
+            </div>
+        </div>
+
+        <!-- Navigation Links -->
+        <nav class="hidden md:flex items-center justify-center space-x-10 py-3 bg-[#0f1115] border-t border-gray-700">
+            <span
+                class="text-lg font-medium text-white cursor-pointer transition-all duration-300 hover:text-pink-400 hover:scale-110">Phone
+                Refills</span>
+            <span
+                class="text-lg font-medium text-white cursor-pointer transition-all duration-300 hover:text-yellow-300 hover:scale-110">Gift
+                Cards</span>
+            <span
+                class="text-lg font-medium text-white cursor-pointer transition-all duration-300 hover:text-green-300 hover:scale-110">e-sim</span>
+            <span
+                class="text-lg font-medium text-white cursor-pointer transition-all duration-300 hover:text-blue-400 hover:scale-110">Travel</span>
+            <span
+                class="text-lg font-medium text-white cursor-pointer transition-all duration-300 hover:text-purple-400 hover:scale-110">Gaming</span>
+        </nav>
+
+        <!-- Mobile Menu (Hidden on Desktop) -->
+        <div class="flex md:hidden justify-between px-4 py-3 bg-[#0f1115]">
+            <h1 class="text-xl font-bold text-white">E-SHOP</h1>
+            <button class="text-white text-2xl">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Trending Now -->
+    <div class="p-4 mt-4">
+        <div class="flex justify-between mb-3">
+            <h1 class="text-3xl font-bold text-white">Popular Cards</h1>
+            <h1 class="mt-2 text-xl text-white">See All</h1>
+        </div>
+        <!-- Desktop Container -->
+        <!-- <div id="mT" class="grid grid-cols-2 sm:grid-cols-2 gap-4 p-2"></div> -->
+        <div id="dt" class="hidden md:grid md:grid-cols-4 gap-4 p-2"></div>
+
+    </div>
+
+
+
+
+
+    <!-- script -->
+
+    <script>
+        // Mobile Trending (limit 8)
+        const mobileContainer = document.getElementById("dt");
+
+        products.forEach(item => {
+            const card = document.createElement("div");
+            card.className = "w-full bg-white/10 backdrop-blur-lg rounded-2xl overflow-hidden shadow-lg transform transition-all duration-500 hover:scale-105 hover:shadow-yellow-500";
+
+            card.innerHTML = `
+            <div class="w-full h-40 overflow-hidden rounded-t-2xl">
+                <img src="${item.img}" 
+                     class="w-full h-full object-cover hover:scale-110 transition-transform duration-500" 
+                     alt="${item.title}">
+            </div>
+            <div class="p-3 flex flex-col justify-between">
+                <h1 class="text-base font-semibold text-white mb-2 hover:text-purple-400 transition-colors">
+                    ${item.title}
+                </h1>
+                <div class="flex justify-between items-center text-xs">
+                    <div class="flex items-center gap-1">
+                        <span class="text-purple-400">₹${item.fromprice}</span>
+                        <span class="text-lg">-</span>
+                        <span class="text-white">₹${item.toPrice}</span>
+                    </div>
+                </div>
+            </div>
+        `;
+            mobileContainer.appendChild(card);
+        });
+
+
+        // Desktop Trending (limit 8)
+        const desktopContainer = document.getElementById("dt");
+        products
+            .forEach(item => {
+                const card = document.createElement("div");
+                card.className = "bg-white/10 backdrop-blur-lg rounded-2xl overflow-hidden shadow-lg transform transition-all duration-500 hover:scale-105 hover:shadow-yellow-500";
+
+                card.innerHTML = `
+           <img src="${item.img}"
+                class="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+                alt="${item.title}">
+                <div class="p-3 flex flex-col justify-between">
+            <h1 class="text-base sm:text-lg font-semibold text-white mb-2 hover:text-purple-400 transition-colors">
+                ${item.title}
+            </h1>
+            <div class="flex items-center text-sm sm:text-base">
+                <span class="text-purple-400 mr-2">₹${item.fromprice}</span>
+                <span class="text-lg">-</span>
+                <span class="ml-2 text-white">₹${item.toPrice}</span>
+                <span class="hidden md:flex ml-auto text-xs sm:text-sm font-semibold text-yellow-400">
+                    ${item.rate}
+                </span>
+            </div>
+        </div>
+    `;
+                desktopContainer.appendChild(card);
+            });
+    </script>
+</body>
+
+</html>

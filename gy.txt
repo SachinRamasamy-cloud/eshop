@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-SHOP</title>
+<style>
+    /* Theme variables */
+    :root {
+        --bodyBg: #ffffff;
+        --textColor: #000000;
+        --subTextColor: #444444;
+        --cardBg: #f0f0f0;
+        --borderColor: #ccc;
+    }
+
+    body.dark-mode {
+        --bodyBg: #121212;
+        --textColor: #ffffff;
+        --subTextColor: #bbbbbb;
+        --cardBg: #1e1e1e;
+        --borderColor: #444;
+    }
+
+    body {
+        background-color: var(--bodyBg);
+        color: var(--textColor);
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 16px;
+        color: var(--subTextColor);
+    }
+
+    select {
+        width: 100%;
+        max-width: 300px;
+        padding: 12px;
+        background-color: var(--cardBg);
+        color: var(--textColor);
+        border: 1px solid var(--borderColor);
+        border-radius: 8px;
+        font-size: 16px;
+        outline: none;
+        cursor: pointer;
+    }
+
+    select option {
+        background-color: var(--cardBg);
+        color: var(--textColor);
+    }
+
+    #estimate {
+        margin-top: 10px;
+        font-size: 16px;
+        color: var(--subTextColor);
+    }
+
+    .theme-toggle {
+        margin-bottom: 20px;
+        padding: 10px 15px;
+        background: var(--cardBg);
+        color: var(--textColor);
+        border: 1px solid var(--borderColor);
+        border-radius: 6px;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body class="dark-mode">
+
+    <button class="theme-toggle" id="themeToggle">Toggle Theme</button>
+
+    <div>
+        <label for="amount">Choose Amount:</label>
+        <select id="amount"></select>
+        <p id="estimate">Estimated Price: ₹0</p>
+    </div>
+
+<script>
+    // Example product
+    const product = {
+        fromprice: 500,
+        toPrice: 1000
+    };
+
+    const select = document.getElementById('amount');
+    const estimateEl = document.getElementById('estimate');
+
+    // Populate dropdown dynamically
+    for (let price = product.fromprice; price <= product.toPrice; price += 50) {
+        let option = document.createElement('option');
+        option.value = price;
+        option.textContent = `₹${price}`;
+        option.style.backgroundColor = 'var(--cardBg)';
+        option.style.color = 'var(--textColor)';
+        select.appendChild(option);
+    }
+
+    // Update estimated price
+    select.addEventListener('change', function () {
+        estimateEl.textContent = `Estimated Price: ₹${parseInt(this.value) + 10}`;
+    });
+
+    // Trigger default selection
+    if (select.options.length > 0) {
+        select.dispatchEvent(new Event('change'));
+    }
+
+    // Theme toggle
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+    });
+</script>
+
+</body>
+</html>

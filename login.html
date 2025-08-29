@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-SHOP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" />
+    <style>
+        :root {
+            --textColor: #fff;
+            --subTextColor: rgba(255, 255, 255, 0.85);
+            --tagColor: rgba(255, 255, 255, 0.65);
+            --borderColor: rgba(255, 255, 255, 0.15);
+            --hoverBorder: rgba(255, 255, 255, 0.3);
+            --cardBg: rgba(255, 255, 255, 0.07);
+            --shadowColor: rgba(0, 255, 255, 0.2);
+            --bodyBg: #0B0F1A;
+            --abel: #d1d5db;
+
+        }
+
+        body.light-mode {
+            --textColor: #111;
+            --subTextColor: rgba(0, 0, 0, 0.85);
+            --tagColor: rgba(0, 0, 0, 0.6);
+            --borderColor: rgba(0, 0, 0, 0.15);
+            --hoverBorder: rgba(0, 0, 0, 0.3);
+            --cardBg: rgba(255, 255, 255, 0.7);
+            --shadowColor: rgba(0, 0, 0, 0.15);
+            --bodyBg: #f4f4f4;
+            --abel: black;
+        }
+
+        body {
+            background: var(--bodyBg);
+            color: var(--textColor);
+            font-family: 'Poppins', sans-serif;
+            transition: background 0.4s ease, color 0.4s ease;
+        }
+
+        .glass {
+            background: var(--cardBg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--borderColor);
+            box-shadow: 0 8px 32px var(--shadowColor);
+        }
+
+        /* Neon Button Glow */
+        .btn-neon {
+            background: linear-gradient(90deg, #00f2ff, #0078ff);
+            color: white;
+            font-weight: bold;
+            border-radius: 10px;
+            padding: 12px;
+            transition: 0.3s ease;
+        }
+
+        .btn-neon:hover {
+            box-shadow: 0 0 20px #00f2ff;
+            transform: translateY(-2px);
+        }
+
+        /* Floating animation */
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Input Glow on focus */
+        input:focus {
+            outline: none;
+            border-color: #00f2ff;
+            box-shadow: 0 0 8px #00f2ff;
+        }
+    </style>
+</head>
+
+<body class="text-white">
+
+    <!-- Robot -->
+    <div class="fixed bottom-4 right-4 z-50 scale-75 lg:scale-90 animate-float hover:scale-100 transition">
+        <div class="relative w-24 h-24 bg-gradient-to-br from-gray-800 to-gray-900 rounded-full
+      border-4 border-cyan-400 shadow-[0_0_30px_rgba(0,255,255,0.5)]
+      flex flex-col items-center justify-center">
+
+            <!-- Antenna -->
+            <div class="absolute -top-3 w-1.5 h-4 bg-cyan-400 rounded-full"></div>
+            <div class="absolute -top-5 w-3 h-3 rounded-full bg-cyan-400 animate-ping"></div>
+
+            <!-- Eyes -->
+            <div class="flex gap-2">
+                <div class="eye w-8 h-8 bg-white rounded-full flex items-center justify-center">
+                    <div class="pupil w-3 h-3 bg-black rounded-full"></div>
+                </div>
+                <div class="eye w-8 h-8 bg-white rounded-full flex items-center justify-center">
+                    <div class="pupil w-3 h-3 bg-black rounded-full"></div>
+                </div>
+            </div>
+
+            <!-- Mouth -->
+            <div class="absolute bottom-3 flex gap-1">
+                <div class="w-1 h-3 bg-cyan-400 animate-bounce"></div>
+                <div class="w-1 h-4 bg-cyan-400 animate-bounce delay-150"></div>
+                <div class="w-1 h-2 bg-cyan-400 animate-bounce delay-300"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <header class="fixed top-0 left-0 w-full z-50 glass shadow-md" style="color: var(--textColor)">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+            <!-- Logo -->
+            <h1 class="text-2xl font-extrabold tracking-wide"><i class="fa-solid fa-gift text-2xl mr-2"></i>E-SHOP</h1>
+
+            <!-- Search Bar -->
+            <div class="hidden md:flex flex-1 justify-center">
+                <div class="bg-white/10 px-4 py-2 rounded-full flex items-center w-96 shadow-lg">
+                    <input type="text" placeholder="Search..."
+                        class="bg-transparent outline-none text-sm w-full text-[var(--textColor)] placeholder-gray-300" />
+                    <i class="fa fa-search text-gray-300"></i>
+                </div>
+            </div>
+
+            <!-- Right Icons -->
+            <div class="hidden md:flex items-center space-x-4">
+                <!-- Dark Mode Toggle -->
+                <button id="modeToggle" class="text-xl hover:text-yellow-400 transition"><i
+                        class="fa fa-moon"></i></button>
+                <div class="flex space-x-2 items-center">
+                    <img src="data:image/png;base64,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"
+                        alt="" class="w-5 h-5  rounded-full">
+                    <h1>IN/EN</h1>
+                </div>
+                <a href="login.html">
+                    <div class="flex space-x-2 items-center">
+                        <i class="fa-solid fa-user"></i>
+                        <h1>Login</h1>
+                    </div>
+                </a>
+            </div>
+
+
+    </header>
+
+    <!-- Login Section -->
+    <div class="" id="login"></div>
+
+    <script>
+        const logins = document.getElementById("login");
+        function login1() {
+            logins.innerHTML = `    <div class="w-full h-screen flex justify-center items-center px-4">
+        <div class="w-full max-w-md glass p-8 rounded-2xl shadow-lg">
+            <h1 class="text-center mb-6 text-3xl font-semibold text-cyan-400">Login</h1>
+            <form>
+                <label class="text-[var(--abel)]">Username</label>
+                <input id="loginm" type="text" class="w-full rounded-lg mb-4 p-3 mt-2 text-black border-2 border-gray-400">
+                <label class="text-[var(--abel)]">Password</label>
+                <input type="password" id="loginpw" class="w-full rounded-lg p-3 mt-2 text-black border-2 border-gray-400">
+            </form>
+<!-- inside login1() -->
+<button class="btn-neon w-full mt-6" id="loginbtn" type="button">Login</button>
+
+            <div class="mt-6 text-center text-sm text-[var(--abel)]">Don't have an account? <a id="showr" href="#"
+                    class="text-cyan-400 hover:underline">Sign Up</a></div>
+        </div>
+    </div>
+`
+        }
+        function reg() {
+            logins.innerHTML = `  
+              <div class="w-full mt-4 h-screen flex justify-center items-center px-4">
+        <div class="w-full max-w-md glass p-8 rounded-2xl shadow-lg">
+            <h1 class="text-center mb-6 text-3xl font-semibold text-cyan-400">Register</h1>
+            <form>
+                <label class="text-[var(--abel)]">Username</label>
+                <input type="text" id="regnm" class="w-full rounded-lg mb-4 p-3 mt-2 text-black border-2 border-gray-400">
+                <label class="text-[var(--abel)]">Email</label>
+                <input type="email" id="regem" class="w-full rounded-lg mb-4 p-3 mt-2 text-black border-2 border-gray-400">
+                <label class="text-[var(--abel)]">Password</label>
+                <input type="password" id="regpw" class="w-full rounded-lg p-3 mt-2 text-black border-2 border-gray-400">
+            </form>
+                <button class="btn-neon w-full mt-6" id="regbtn" type="button">Register</button>
+
+            <div class="mt-6 text-center text-sm text-[var(--abel)]">Already have an account? <a id="show1" href="#"
+                    class="text-cyan-400 hover:underline">Sign In</a></div>
+        </div>
+    </div>`
+        }
+        // Event delegation to switch between login and registration
+        logins.addEventListener("click", (e) => {
+            if (e.target.id === "showr") {
+                e.preventDefault();
+                reg();
+            } else if (e.target.id === "show1") {
+                e.preventDefault();
+                login1();
+            }
+        });
+        login1();
+    </script>
+    <script src="emg.js"></script>
+    <script src="login.js"></script>
+</body>
+
+</html>
